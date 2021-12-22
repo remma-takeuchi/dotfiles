@@ -58,4 +58,6 @@ zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 # To be able to completion by pusshing tab
 #zstyle ':completion:*:default' menu select=1
 
-
+if [[ -e ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
