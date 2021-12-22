@@ -10,7 +10,7 @@ function neovim_nightly() {
   #sudo ln -snf /usr/local/bin/nvim.appimage /usr/local/bin/nvim
 
   pushd /usr/local/bin/ > /dev/null
-  ./nvim.appimage --appimage-extract
+  sudo ./nvim.appimage --appimage-extract
   sudo ln -snf `realpath ./squashfs-root/usr/bin/nvim` ./
   sudo ln -snf nvim vim
   #rm -rf ./squashfs-root ./nvim.appimage
