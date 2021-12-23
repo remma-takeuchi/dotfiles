@@ -12,4 +12,7 @@ pushd ${DOTFILES_ROOT}/install_scripts > /dev/null
 # link configurations
 ./lib/link_dotfiles.sh
 
+# Install vim plugins
+./lib/install_vimplugins.sh
+
 popd > /dev/null
