@@ -18,8 +18,6 @@ function neovim_nightly() {
   popd > /dev/null
 }
 
-#DEBIAN_FRONTEND=noninteractive sudo apt install -y fuse
-
 # Neovim
 neovim_nightly
 
