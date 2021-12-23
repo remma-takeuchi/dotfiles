@@ -16,3 +16,5 @@ pushd ${DOTFILES_ROOT}/install_scripts > /dev/null
 ./lib/install_vimplugins.sh
 
 popd > /dev/null
+
+zsh
