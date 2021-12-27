@@ -18,13 +18,22 @@ function neovim_nightly() {
   popd > /dev/null
 }
 
-# Neovim
-neovim_nightly
+type nvim > /dev/null
+if [[ $? -ne 0 ]]; then
 
-# Vim-plug
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  os_type=`uname`
+  if [[ $os_type == "Linux" ]]; then
+    # Neovim
+    neovim_nightly
 
-# Nodejs for coc.nvim
-curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-DEBIAN_FRONTEND=noninteractive sudo apt install -y nodejs
+    # Vim-plug
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+    # Nodejs for coc.nvim
+    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+    DEBIAN_FRONTEND=noninteractive sudo apt install -y nodejs
+  fi
+fi
+
+

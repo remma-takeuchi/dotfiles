@@ -1,4 +1,7 @@
-#!/usr/bin/env zsh
+#!/bin/bash
+
+scriptdir=$(cd $(dirname $0); pwd)
+export DOTFILES_ROOT=`realpath ${scriptdir}/../../`
 
 pushd ${DOTFILES_ROOT} > /dev/null
 

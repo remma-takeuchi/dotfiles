@@ -58,6 +58,12 @@ zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 # To be able to completion by pusshing tab
 #zstyle ':completion:*:default' menu select=1
 
+type nvim > /dev/null 2>&1
+if [ $? -eq 0 ] ; then
+    alias vim="nvim"
+fi
+
+
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
