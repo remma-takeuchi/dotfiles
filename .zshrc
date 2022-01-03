@@ -15,7 +15,7 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# To be able to print japanease 
+# To be able to print japanease
 setopt print_eight_bit
 export LANG=en_US.UTF-8
 
@@ -36,7 +36,7 @@ darwin*)
     alias ls="ls -G"
     alias ll="ls -lG"
     alias la="ls -laG"
-    export LSCOLORS=ExFxBxDxCxegedabagacad
+    #export LSCOLORS=ExFxBxDxCxegedabagacad
     ;;
 linux*)
     alias ls='ls --color'
@@ -67,3 +67,5 @@ fi
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh

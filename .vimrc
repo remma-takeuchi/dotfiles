@@ -72,9 +72,17 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " *レジスタ：マウス中クリックで貼り付けられるもの unnamed
 set clipboard&
 set clipboard^=unnamedplus,unnamed
-"set clipboard=unnamed,autoselect
+if has('nvim')
+  set clipboard=unnamed
+else
+  set clipboard=unnamed,autoselect
+endif
 
 
 " インデントはスマートインデント
 set smartindent
+
+let mapleader = "\<Space>"
+
+inoremap jk  <Esc>
 
