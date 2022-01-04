@@ -1,4 +1,5 @@
 # Key bind
+bindkey -e
 bindkey \^U backward-kill-line
 
 # Path to your oh-my-zsh installation.
@@ -36,7 +37,7 @@ darwin*)
     alias ls="ls -G"
     alias ll="ls -lG"
     alias la="ls -laG"
-    #export LSCOLORS=ExFxBxDxCxegedabagacad
+    export LSCOLORS=ExFxBxDxCxegedabagacad
     ;;
 linux*)
     alias ls='ls --color'
@@ -49,23 +50,29 @@ autoload -U compinit
 compinit
 export TERM=xterm-256color
 export CLICOLOR=1
-zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+#zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 
 # Completion
 # Case insensitive match
-#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # To be able to completion by pusshing tab
-#zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*:default' menu select=1
+#zstyle ':completion:*:default' menu select=2
 
+
+# vim
 type nvim > /dev/null 2>&1
 if [ $? -eq 0 ] ; then
     alias vim="nvim"
 fi
+
+# FZF
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 
 
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh

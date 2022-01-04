@@ -30,18 +30,17 @@ if [[ $os_type == "Linux" ]]; then
   sudo apt update
   DEBIAN_FRONTEND=noninteractive sudo apt install -y git wget curl
   DEBIAN_FRONTEND=noninteractive sudo apt install -y zsh tmux
-  DEBIAN_FRONTEND=noninteractive sudo apt install -y python3 python3-pip
+  DEBIAN_FRONTEND=noninteractive sudo apt install -y python3 python3-pip python3-venv
   DEBIAN_FRONTEND=noninteractive sudo apt install -y locales-all
+  DEBIAN_FRONTEND=noninteractive sudo apt install -y jq clangd
 
   install_deb_from_url rg https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
   install_deb_from_url fd https://github.com/sharkdp/fd/releases/download/v8.3.0/fd_8.3.0_amd64.deb
-
 
 # Mac
 elif [[ $os_type == "Darwin" ]]; then
   brew install fzf
 fi
-
 
 # Common
 # FZF

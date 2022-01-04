@@ -9,9 +9,19 @@ Plug 'junegunn/vim-easy-align'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'yuttie/comfortable-motion.vim'
 
+" Code Syntax
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" Filer
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/glyph-palette.vim'
+
 
 " Compleation
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -50,6 +60,12 @@ colorscheme iceberg
 set statusline^=%{coc#status()}
 
 
+" coc.vim
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references
+
 " fzf.vim
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>r :Rg<CR>
@@ -59,14 +75,21 @@ nnoremap <Leader>h :History<CR>
 
 " easymotion
 " <Leader>f{char} to move to {char}
-noremap  <Leader>c <Plug>(easymotion-bd-f)
-nnoremap <Leader>c <Plug>(easymotion-overwin-f)
+nmap  <Leader>c <Plug>(easymotion-bd-f)
+nmap <Leader>c <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
-nnoremap s <Plug>(easymotion-overwin-f2)
+nmap s <Plug>(easymotion-overwin-f2)
 " Move to line
-noremap <Leader>l <Plug>(easymotion-bd-jk)
-nnoremap <Leader>l <Plug>(easymotion-overwin-line)
+nmap <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
 
+" Fern
+let g:fern#renderer = 'nerdfont'
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType fern call glyph_palette#apply()
+  autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
 
 " Custom commands
 if executable('jq')
