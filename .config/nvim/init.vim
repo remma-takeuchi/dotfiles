@@ -37,6 +37,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-expand-region'
 Plug 'easymotion/vim-easymotion'
+Plug 'vim-scripts/YankRing.vim'
 
 call plug#end()
 
@@ -64,7 +65,7 @@ set statusline^=%{coc#status()}
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references
+nmap <silent> gr <Plug>(coc-references)
 
 " fzf.vim
 nnoremap <Leader>f :FZF<CR>
@@ -84,12 +85,19 @@ nmap <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
 
 " Fern
+let g:fern#default_hidden=1
 let g:fern#renderer = 'nerdfont'
 augroup my-glyph-palette
   autocmd! *
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
+augroup FernGroup
+  autocmd!
+  "autocmd FileType fern setlocal norelativenumber | setlocal nonumber | call FernInit()
+  autocmd FileType fern setlocal norelativenumber | setlocal nonumber
+augroup END
+nnoremap <silent> <Leader>e :Fern . -drawer -width=40 -toggle<CR>
 
 " Custom commands
 if executable('jq')
