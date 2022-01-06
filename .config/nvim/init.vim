@@ -41,9 +41,7 @@ Plug 'vim-scripts/YankRing.vim'
 
 call plug#end()
 
-
 source ~/.vimrc
-
 
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
@@ -69,6 +67,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " fzf.vim
 nnoremap <Leader>f :FZF<CR>
+" nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>r :Rg<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>w :Windows<CR>
@@ -97,7 +96,7 @@ augroup FernGroup
   "autocmd FileType fern setlocal norelativenumber | setlocal nonumber | call FernInit()
   autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 augroup END
-nnoremap <silent> <Leader>e :Fern . -drawer -width=40 -toggle<CR>
+nnoremap <silent> <Leader>e :Fern . -drawer -width=30 -toggle<CR>
 
 " Custom commands
 if executable('jq')

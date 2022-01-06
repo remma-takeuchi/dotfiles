@@ -13,4 +13,6 @@ ln -fs ${DOTFILES_ROOT}/.vimrc ${HOME}
 mkdir -p ${HOME}/.config
 ln -fs ${DOTFILES_ROOT}/.config/nvim/ ${HOME}/.config/
 
+ln -fs ${DOTFILES_ROOT}/shell/fz.sh ${HOME}/.fzf/shell
+
 popd > /dev/null

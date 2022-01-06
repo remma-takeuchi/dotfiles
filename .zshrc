@@ -67,12 +67,34 @@ if [ $? -eq 0 ] ; then
     alias vim="nvim"
 fi
 
-# FZF
+# z - jump around
+alias j=z
+
+# fzf
 #export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-#export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
 #fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 
+# fzf + z
+function fj() {
+  dest=`z | gawk '{print $2}' | fzf --reverse --preview "tree -L 2 {}"`
+  [ -z $dest ] && return 1
+  cd $dest
+}
+
+# fzf + rg
+function fgr() {
+  grep_cmd="grep --recursive --line-number --invert-match --regexp '^\s*$' * 2>/dev/null"
+  if type "rg" >/dev/null 2>&1; then
+    grep_cmd="rg --hidden --no-ignore --line-number --no-heading --invert-match '^\s*$' 2>/dev/null"
+  fi
+  read -r file line <<<"$(eval $grep_cmd | fzf --select-1 --exit-0 | awk -F: '{print $1, $2}')"
+  ( [[ -z "$file" ]] || [[ -z "$line" ]] ) && return
+  vim $file +$line
+}
 
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local

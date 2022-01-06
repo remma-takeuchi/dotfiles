@@ -16,6 +16,6 @@ def parse_arguments():
     parser.add_argument("-A", "--add", default=None, help="Add")
     return parser.parse_args()
 
-
 if __name__ == "__main__":
     main()
+
