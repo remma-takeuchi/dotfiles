@@ -18,6 +18,17 @@ set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
 
+"" viminfo
+set viminfo='1000,:1000,n~/.cache/vim/viminfo
+
+"" Undo
+set undofile
+set undodir=~/.cache/vim/undo/
+
+"" Swap
+set swapfile
+set directory=~/.cache/vim/swap/
+
 
 " 見た目系
 " 行番号を表示

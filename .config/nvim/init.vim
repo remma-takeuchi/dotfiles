@@ -66,8 +66,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " fzf.vim
-nnoremap <Leader>f :FZF<CR>
-" nnoremap <Leader>f :Files<CR>
+" nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>r :Rg<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>w :Windows<CR>
