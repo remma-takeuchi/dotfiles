@@ -68,7 +68,9 @@ if [ $? -eq 0 ] ; then
 fi
 
 # FZF
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+#export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+#export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+#fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 
 
