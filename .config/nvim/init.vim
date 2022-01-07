@@ -22,7 +22,6 @@ Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 
-
 " Compleation
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'bronson/vim-trailing-whitespace'
@@ -38,6 +37,9 @@ Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-expand-region'
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/YankRing.vim'
+Plug 'unblevable/quick-scope'
+Plug 'rhysd/clever-f.vim'
+
 
 call plug#end()
 
@@ -55,9 +57,22 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 " Colorscheme
-colorscheme iceberg
+" colorscheme iceberg
+" colorscheme apprentice
+colorscheme lucius
 set statusline^=%{coc#status()}
 
+" nvim-treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true
+  }
+}
+EOF
+
+" clever_f
+let g:clever_f_smart_case=1
 
 " coc.vim
 nmap <silent> gd <Plug>(coc-definition)
