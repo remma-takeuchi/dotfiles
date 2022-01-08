@@ -111,7 +111,7 @@ augroup FernGroup
   "autocmd FileType fern setlocal norelativenumber | setlocal nonumber | call FernInit()
   autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 augroup END
-nnoremap <silent> <Leader>e :Fern . -drawer -width=30 -toggle<CR>
+nnoremap <silent> <Leader>e :Fern . -drawer -width=30 -toggle -stay -reveal=%<CR>
 
 " Custom commands
 if executable('jq')
