@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function install_tzdata(){
+  ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+  DEBIAN_FRONTEND=noninteractive apt install -y tzdata
+  dpkg-reconfigure --frontend noninteractive tzdata
+}
+
 function install_deb_from_url () {
   cmdname=$1
   deburl=$2
@@ -17,7 +23,7 @@ function install_deb_from_url () {
   popd > /dev/null
 }
 
-function installclangd () {
+function install_clangd () {
   zipurl="https://github.com/clangd/clangd/releases/download/13.0.0/clangd-linux-13.0.0.zip"
 
   type clangd > /dev/null
@@ -40,12 +46,15 @@ function installclangd () {
 function install_tmux () {
   tarballurl="https://github.com/tmux/tmux/releases/download/3.2a/tmux-3.2a.tar.gz"
 
-  rc=`type tmux > /dev/null`
+  type tmux > /dev/null
+  rc=$?
   if [[ $rc -eq 0 ]]; then
     return 0
   fi
 
-  DEBIAN_FRONTEND=noninteractive sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config
+  export DEBIAN_FRONTEND=noninteractive
+  # DEBIAN_FRONTEND=noninteractive sudo apt install -y -q libevent-dev ncurses-dev build-essential bison pkg-config
+  sudo apt install -y -q libevent-dev ncurses-dev build-essential bison pkg-config
 
   tempdir=`mktemp -d`
   mkdir -p $tempdir
@@ -63,7 +72,6 @@ function install_tmux () {
 
 os_type=`uname`
 
-
 # Debian
 if [[ $os_type == "Linux" ]]; then
   type sudo > /dev/null 2>&1
@@ -72,6 +80,8 @@ if [[ $os_type == "Linux" ]]; then
     apt update && apt install sudo
   fi
   sudo apt update
+  install_tzdata
+
   DEBIAN_FRONTEND=noninteractive sudo apt install -y git wget curl zip
   # DEBIAN_FRONTEND=noninteractive sudo apt install -y zsh tmux
   DEBIAN_FRONTEND=noninteractive sudo apt install -y zsh
