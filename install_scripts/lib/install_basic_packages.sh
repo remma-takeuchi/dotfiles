@@ -17,8 +17,7 @@ function install_deb_from_url () {
   popd > /dev/null
 }
 
-function install_clangd () {
-  install_dir=$HOME/bin/
+function installclangd () {
   zipurl="https://github.com/clangd/clangd/releases/download/13.0.0/clangd-linux-13.0.0.zip"
 
   type clangd > /dev/null
@@ -36,8 +35,31 @@ function install_clangd () {
     sudo mv ./clangd_13.0.0/lib/clang /usr/local/lib
   popd > /dev/null
   rm -rf $tempdir
-  popd > /dev/null
 }
+
+function install_tmux () {
+  tarballurl="https://github.com/tmux/tmux/releases/download/3.2a/tmux-3.2a.tar.gz"
+
+  rc=`type tmux > /dev/null`
+  if [[ $rc -eq 0 ]]; then
+    return 0
+  fi
+
+  DEBIAN_FRONTEND=noninteractive sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config
+
+  tempdir=`mktemp -d`
+  mkdir -p $tempdir
+  pushd $tempdir > /dev/null
+  wget $tarballurl && \
+    tar -zxf tmux-*.tar.gz && \
+    cd tmux-*/  && \
+    ./configure && \
+    make && sudo make install && \
+  popd > /dev/null
+  rm -rf $tempdir
+}
+
+
 
 os_type=`uname`
 
@@ -51,16 +73,18 @@ if [[ $os_type == "Linux" ]]; then
   fi
   sudo apt update
   DEBIAN_FRONTEND=noninteractive sudo apt install -y git wget curl zip
-  DEBIAN_FRONTEND=noninteractive sudo apt install -y zsh tmux
+  # DEBIAN_FRONTEND=noninteractive sudo apt install -y zsh tmux
+  DEBIAN_FRONTEND=noninteractive sudo apt install -y zsh
   DEBIAN_FRONTEND=noninteractive sudo apt install -y python3 python3-pip python3-venv
   DEBIAN_FRONTEND=noninteractive sudo apt install -y locales-all
-  DEBIAN_FRONTEND=noninteractive sudo apt install -y jq clangd
+  DEBIAN_FRONTEND=noninteractive sudo apt install -y jq
 
   install_deb_from_url rg https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
   install_deb_from_url fd https://github.com/sharkdp/fd/releases/download/v8.3.0/fd_8.3.0_amd64.deb
   install_deb_from_url bat https://github.com/sharkdp/bat/releases/download/v0.18.3/bat_0.18.3_amd64.deb
 
   install_clangd
+  install_tmux
 
 # Mac
 elif [[ $os_type == "Darwin" ]]; then
