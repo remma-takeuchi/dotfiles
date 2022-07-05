@@ -1,6 +1,19 @@
 filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
+" Custom commands
+if executable('nodejs')
+" FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Compleation
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Snipet
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+endif
 
 " Apearance
 Plug 'vim-airline/vim-airline'
@@ -12,23 +25,11 @@ Plug 'yuttie/comfortable-motion.vim'
 " Code Syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" FZF
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
 " Filer
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
-
-" Compleation
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'bronson/vim-trailing-whitespace'
-
-" Snipet
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 " General operations
 Plug 'jiangmiao/auto-pairs'
@@ -39,6 +40,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'unblevable/quick-scope'
 Plug 'rhysd/clever-f.vim'
+Plug 'bronson/vim-trailing-whitespace'
 
 
 call plug#end()

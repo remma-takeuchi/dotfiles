@@ -3,6 +3,8 @@
 scriptdir=$(cd $(dirname $0); pwd)
 export DOTFILES_ROOT=`realpath ${scriptdir}/../`
 
+cd $scriptdir
+
 # Install modules
 ./lib/prepare_minimal_packages.sh
 

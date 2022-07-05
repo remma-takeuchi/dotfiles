@@ -1,7 +1,7 @@
 # cat
 type bat > /dev/null 2>&1
 if [ $? -eq 0 ] ; then
-    alias cat="bat -p"
+    alias cat="bat -pP"
 fi
 
 # vim
