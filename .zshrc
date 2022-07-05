@@ -4,7 +4,7 @@ bindkey \^U backward-kill-line
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-plugins=(git sudo copydir copyfile z docker zsh-autosuggestions)
+plugins=(git sudo copypath copyfile z docker zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 # Theme

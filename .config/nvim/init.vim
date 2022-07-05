@@ -1,19 +1,6 @@
 filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
-" Custom commands
-if executable('nodejs')
-" FZF
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" Compleation
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Snipet
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-endif
 
 " Apearance
 Plug 'vim-airline/vim-airline'
@@ -42,6 +29,19 @@ Plug 'unblevable/quick-scope'
 Plug 'rhysd/clever-f.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
+" Custom commands
+if executable('node')
+    " FZF
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
+    " Compleation
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " Snipet
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+endif
 
 call plug#end()
 
@@ -85,7 +85,7 @@ nmap <silent> gr <Plug>(coc-references)
 " fzf.vim
 " nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>r :Rg<CR>
+nnoremap <Leader>g :Rg<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>w :Windows<CR>
 nnoremap <Leader>h :History<CR>
@@ -114,9 +114,4 @@ augroup FernGroup
   autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 augroup END
 nnoremap <silent> <Leader>e :Fern . -drawer -width=30 -toggle -stay -reveal=%<CR>
-
-" Custom commands
-if executable('jq')
-  command! Jqf %!jq '.'
-endif
 

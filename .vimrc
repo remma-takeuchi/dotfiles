@@ -99,3 +99,11 @@ let mapleader = "\<Space>"
 
 inoremap jk  <Esc>
 
+
+" Custom commands
+if executable('jq')
+  command! Jqf %!jq '.'
+endif
+
+nnoremap <Leader>r :reg<CR>
+

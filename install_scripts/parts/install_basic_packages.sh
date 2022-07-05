@@ -2,7 +2,7 @@
 
 function install_tzdata(){
   ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-  DEBIAN_FRONTEND=noninteractive apt install -y tzdata
+  DEBIAN_FRONTEND=noninteractive sudo apt install -y tzdata
   dpkg-reconfigure --frontend noninteractive tzdata
 }
 
