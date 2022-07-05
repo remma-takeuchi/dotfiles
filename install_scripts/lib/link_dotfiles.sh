@@ -8,9 +8,11 @@ ln -fs ${DOTFILES_ROOT}/.zshrc ${HOME}
 ln -fs ${DOTFILES_ROOT}/.bashrc ${HOME}
 
 ln -fs ${DOTFILES_ROOT}/.vimrc ${HOME}
+ln -fs ${DOTFILES_ROOT}/shell/fz.sh ${HOME}/.fzf/shell
 mkdir -p ${HOME}/.config
 ln -fs ${DOTFILES_ROOT}/.config/nvim/ ${HOME}/.config/
-ln -fs ${DOTFILES_ROOT}/shell/fz.sh ${HOME}/.fzf/shell
+ln -fs ${DOTFILES_ROOT}/.config/bat/ ${HOME}/.config/
+ln -fs ${DOTFILES_ROOT}/.config/shell/ ${HOME}/.config/
 
 popd > /dev/null
 

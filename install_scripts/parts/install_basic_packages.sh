@@ -14,7 +14,8 @@ if [[ $os_type == "Linux" ]]; then
   type sudo > /dev/null 2>&1
   rc=$?
   if [ $rc != 0 ] ; then
-    apt update && apt install sudo
+    DEBIAN_FRONTEND=noninteractive apt update && \\
+    DEBIAN_FRONTEND=noninteractive apt install sudo
   fi
 
   sudo apt update
