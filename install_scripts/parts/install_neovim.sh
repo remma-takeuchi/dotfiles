@@ -30,10 +30,9 @@ if [[ $? -ne 0 ]]; then
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-    # Nodejs for coc.nvim
-    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-    DEBIAN_FRONTEND=noninteractive sudo apt install -y nodejs
+    # # Nodejs for coc.nvim
+    # curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+    # DEBIAN_FRONTEND=noninteractive sudo apt install -y nodejs
   fi
 fi
-
 

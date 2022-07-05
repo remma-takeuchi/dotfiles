@@ -2,19 +2,18 @@
 
 scriptdir=$(cd $(dirname $0); pwd)
 export DOTFILES_ROOT=`realpath ${scriptdir}/../`
+cd ${scriptdir}
 
 # Install modules
-pushd ${DOTFILES_ROOT}/install_scripts > /dev/null
-./lib/install_basic_packages.sh
-./lib/install_neovim.sh
-./lib/install_zshplugins.sh
+./lib/prepare_minimal_packages.sh
+./lib/prepare_ritch_packages.sh
 
 # link configurations
 ./lib/link_dotfiles.sh
 
 # Install vim plugins
-./lib/install_neovim_minimal_plugins.sh
+./lib/finalize_minimal_packages.sh
+./lib/finalize_ritch_packages.sh
 
 popd > /dev/null
 
-zsh
