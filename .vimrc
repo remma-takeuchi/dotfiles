@@ -106,4 +106,5 @@ if executable('jq')
 endif
 
 nnoremap <Leader>r :reg<CR>
+nnoremap <Leader>n :set nonumber!<CR>
 
