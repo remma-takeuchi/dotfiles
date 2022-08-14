@@ -31,5 +31,5 @@ os_type=`uname`
 # Debian
 if [[ $os_type == "Linux" ]]; then
   install_tmux
-
+fi
 

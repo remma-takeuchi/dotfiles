@@ -105,6 +105,5 @@ if executable('jq')
   command! Jqf %!jq '.'
 endif
 
-nnoremap <Leader>r :reg<CR>
 nnoremap <Leader>n :set nonumber!<CR>
 

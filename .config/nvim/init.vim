@@ -29,11 +29,16 @@ Plug 'unblevable/quick-scope'
 Plug 'rhysd/clever-f.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
+Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+
+" FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " Custom commands
 if executable('node')
-    " FZF
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
 
     " Compleation
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -46,6 +51,15 @@ endif
 call plug#end()
 
 source ~/.vimrc
+
+" Registers
+let g:registers_window_border = "single"
+
+" bufferline (Tab)
+set termguicolors
+lua << EOF
+require("bufferline").setup{}
+EOF
 
 " YankRing
 let g:yankring_history_dir="/tmp/"
@@ -64,7 +78,9 @@ let g:UltiSnipsEditSplit="vertical"
 " Colorscheme
 " colorscheme iceberg
 " colorscheme apprentice
-colorscheme lucius
+" colorscheme lucius
+colorscheme solarized8
+
 set statusline^=%{coc#status()}
 
 " nvim-treesitter
@@ -88,7 +104,7 @@ nmap <silent> gr <Plug>(coc-references)
 " fzf.vim
 " nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>g :Rg<CR>
+nnoremap <Leader>r :Rg<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>w :Windows<CR>
 nnoremap <Leader>h :History<CR>
