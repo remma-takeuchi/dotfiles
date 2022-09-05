@@ -1,3 +1,6 @@
+# dircolors
+eval `dircolors -b $HOME/.dircolors`
+
 # cat
 type bat > /dev/null 2>&1
 if [ $? -eq 0 ] ; then
