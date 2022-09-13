@@ -26,3 +26,6 @@ install_deb_from_url fd https://github.com/sharkdp/fd/releases/download/v8.3.0/f
 # bat
 install_deb_from_url bat https://github.com/sharkdp/bat/releases/download/v0.18.3/bat_0.18.3_amd64.deb
 
+# # neovim
+# install_deb_from_url nvim https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
+

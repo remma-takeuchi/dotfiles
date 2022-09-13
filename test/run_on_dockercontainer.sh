@@ -6,5 +6,5 @@ DOTFILES_ROOT=`realpath ${scriptdir}/../`
 docker run --rm -it \
   -v $DOTFILES_ROOT:/dotfiles \
   -v ~/Projects:/Projects \
-  ubuntu:latest /dotfiles/install_scripts/install_dotfiles.sh
+  ubuntu:latest /dotfiles/install_scripts/install_minimal.sh
 
