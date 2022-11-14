@@ -29,7 +29,8 @@ Plug 'unblevable/quick-scope'
 Plug 'rhysd/clever-f.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
-Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
+" Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
+Plug 'tversteeg/registers.nvim', { 'tag': 'v1.5.0' }
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
@@ -55,9 +56,6 @@ source ~/.vimrc
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 文字色
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
-
-" Registers
-let g:registers_window_border = "single"
 
 " bufferline (Tab)
 set termguicolors
@@ -137,4 +135,7 @@ augroup FernGroup
   autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 augroup END
 nnoremap <silent> <Leader>e :Fern . -drawer -width=30 -toggle -stay -reveal=%<CR>
+
+" Registers
+let g:registers_window_border = "single"
 
