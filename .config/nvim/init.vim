@@ -1,5 +1,9 @@
 filetype plugin indent on
 
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 文字色
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
+
 call plug#begin('~/.vim/plugged')
 
 " Apearance
@@ -8,6 +12,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/vim-easy-align'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'itchyny/vim-cursorword'
 
 " Code Syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -27,7 +32,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'unblevable/quick-scope'
 Plug 'rhysd/clever-f.vim'
-Plug 'bronson/vim-trailing-whitespace'
+" Plug 'bronson/vim-trailing-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 
 " Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 Plug 'tversteeg/registers.nvim', { 'tag': 'v1.5.0' }
@@ -53,15 +59,22 @@ call plug#end()
 
 source ~/.vimrc
 
+" General shortcut for neovim
 set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 文字色
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
+tnoremap jk <C-\><C-n>
+
+
+" set termguicolors
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 文字色
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
 
 " bufferline (Tab)
-set termguicolors
 lua << EOF
 require("bufferline").setup{}
 EOF
+nnoremap <Leader>n :BufferLineCycleNext<CR>
+nnoremap <Leader>p :BufferLineCyclePrev<CR>
+nnoremap <Leader>s :BufferLinePick<CR>
 
 " YankRing
 let g:yankring_history_dir="/tmp/"
@@ -78,9 +91,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 " Colorscheme
-" colorscheme iceberg
-" colorscheme apprentice
-" colorscheme lucius
 colorscheme solarized8
 
 set statusline^=%{coc#status()}
@@ -107,17 +117,17 @@ nmap <silent> gr <Plug>(coc-references)
 " nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>r :Rg<CR>
+nnoremap <Leader>h :History<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>w :Windows<CR>
-nnoremap <Leader>h :History<CR>
 
 " easymotion
 " <Leader>f{char} to move to {char}
 nmap  <Leader>c <Plug>(easymotion-bd-f)
 nmap <Leader>c <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-" Move to line
+" nmap s <Plug>(easymotion-overwin-f2)
+"n Move to line
 nmap <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
 
@@ -131,7 +141,7 @@ augroup my-glyph-palette
 augroup END
 augroup FernGroup
   autocmd!
-  "autocmd FileType fern setlocal norelativenumber | setlocal nonumber | call FernInit()
+  " autocmd FileType fern setlocal norelativennumber | setlocal nonumber | call FernInit()
   autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 augroup END
 nnoremap <silent> <Leader>e :Fern . -drawer -width=30 -toggle -stay -reveal=%<CR>

@@ -5,7 +5,7 @@ filetype plugin indent on
 set fenc=utf-8
 "文字コードの自動判別の設定
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencodings=utf-8,sjis,iso-2022-jp,euc-jp
 set fileformats=unix,mac
 " バックアップファイルを作らない
 set nobackup
@@ -80,6 +80,11 @@ set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 
+" ヤンク
+" nnoremap d "_d
+" xnoremap d "_d
+" xnoremap p "_dP
+
 " OSのクリップボードを使う
 " +レジスタ：Ubuntuの[Ctrl-v]で貼り付けられるもの unnamedplus
 " *レジスタ：マウス中クリックで貼り付けられるもの unnamed
@@ -99,11 +104,12 @@ let mapleader = "\<Space>"
 
 inoremap jk  <Esc>
 
-
 " Custom commands
 if executable('jq')
   command! Jqf %!jq '.'
 endif
 
-nnoremap <Leader>n :set nonumber!<CR>
+nnoremap <Leader>i :set nonumber!<CR>
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>p :bn<CR>
 
