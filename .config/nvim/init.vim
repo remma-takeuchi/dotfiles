@@ -77,7 +77,11 @@ nnoremap <Leader>p :BufferLineCyclePrev<CR>
 nnoremap <Leader>s :BufferLinePick<CR>
 
 " YankRing
-let g:yankring_history_dir="/tmp/"
+if has('win32') || has ('win64')
+    let g:yankring_history_dir=expand("$HOME/AppData/Local/Temp")
+else
+    let g:yankring_history_dir="/tmp/"
+endif
 
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
