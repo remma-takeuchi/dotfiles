@@ -1,3 +1,8 @@
+# MACならパスを保管(dircolorsでエラーが出るため)
+if [ "$(uname)" = 'Darwin' ]; then
+    export PATH="$PATH:$(brew --prefix coreutils)/libexec/gnubin"
+fi
+
 # dircolors
 eval `dircolors -b $HOME/.dircolors`
 

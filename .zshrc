@@ -76,11 +76,13 @@ function fj() {
   cd $dest
 }
 
+# Macの場合はパスを通すため、先にローカル設定を読み込む
+if [[ -e ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
+
 if [[ -e ~/.config/shell/common_settings.sh ]]; then
   source ~/.config/shell/common_settings.sh
 fi
 
-if [[ -e ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
-fi
 
