@@ -1,0 +1,86 @@
+# --- Path ---------------------------------------------------
+# PATH は必ず最初に確定（starship/zoxide/fzf検出に影響）
+[[ -e ~/.config/shell/path.zsh ]] && source ~/.config/shell/path.zsh
+
+# --- Local overrides -----------------------------------------
+# マシン固有（PATH追加/プロキシ等）があるなら早めに読む
+[[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# --- Basics -------------------------------------------------
+export LANG=en_US.UTF-8
+setopt print_eight_bit
+export TERM=xterm-256color
+
+# --- Key binds ----------------------------------------------
+bindkey -e
+bindkey '^U' backward-kill-line
+
+# --- History ------------------------------------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt share_history
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+
+# --- Completion (cached compinit) ---------------------------
+autoload -Uz compinit
+compinit -C -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
+
+# Completion styles (minimal)
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*:default' menu select=1
+
+# --- ls colors / aliases ------------------------------------
+case "${OSTYPE}" in
+  darwin*)
+    export CLICOLOR=1
+    export LSCOLORS=ExFxBxDxCxegedabagacad
+    alias ls="ls -G"
+    alias ll="ls -lG"
+    alias la="ls -laG"
+    ;;
+  linux*)
+    alias ls='ls --color=auto'
+    alias ll='ls -l --color=auto'
+    alias la='ls -la --color=auto'
+    ;;
+esac
+
+# --- fzf -----------------------------------------------------
+# Ctrl-T / Ctrl-R / Alt-C などのキー割り当てはここ
+# 1) まず Homebrew/一般的な場所を探す
+if [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
+  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+  source /opt/homebrew/opt/fzf/shell/completion.zsh 2>/dev/null
+elif [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
+  source /usr/local/opt/fzf/shell/completion.zsh 2>/dev/null
+# 2) 次に XDG 配下（あなたが使っていた配置）を試す
+elif [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.zsh" ]]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.zsh"
+fi
+
+# 使い勝手（任意）
+export FZF_DEFAULT_OPTS="--reverse --height 40%"
+
+# --- zoxide (directory jump) --------------------------------
+# brew install zoxide
+# z <query> : jump
+# zi        : interactive (fzf があると強い)
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+  alias j='z'   # 以前の運用(j=jump)を残すなら
+fi
+
+# --- Prompt (Starship) --------------------------------------
+# brew install starship
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+
+# --- Other shared settings ----------------------------------
+[[ -e ~/.config/shell/common_settings.sh ]] && source ~/.config/shell/common_settings.sh
