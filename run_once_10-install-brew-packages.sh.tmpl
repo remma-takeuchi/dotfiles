@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# brew の PATH を補助（Mac / Linux）
+if command -v brew >/dev/null 2>&1; then
+  :
+else
+  eval "$(`brew --prefix`/bin/brew shellenv)"
+fi
+
+BREWFILE_DIR="{{ .chezmoi.sourceDir }}"
+
+brew bundle --file "${BREWFILE_DIR}/Brewfile.common"
+
+{{- if eq .chezmoi.os "darwin" }}
+brew bundle --file "${BREWFILE_DIR}/Brewfile.darwin" || true
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
+brew bundle --file "${BREWFILE_DIR}/Brewfile.linux" || true
+{{- end }}
+
+# fzf の補助スクリプト（ある場合だけ）
+if brew --prefix fzf >/dev/null 2>&1; then
+  FZF_INSTALL="$(brew --prefix fzf)/install"
+  if [ -x "$FZF_INSTALL" ]; then
+    "$FZF_INSTALL" --key-bindings --completion --no-update-rc
+  fi
+fi

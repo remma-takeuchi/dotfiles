@@ -1,0 +1,48 @@
+# ----------------------------
+# fzf common config
+# ----------------------------
+
+# 見た目・操作
+export FZF_DEFAULT_OPTS="
+--height=40%
+--layout=reverse
+--border
+--info=inline
+--cycle
+--prompt='❯ '
+--pointer='▶'
+--marker='✓'
+--bind='ctrl-j:down,ctrl-k:up'
+--bind='ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'
+--bind='?:toggle-preview'
+--preview-window='right:60%:wrap'
+"
+
+# 候補生成（ファイル）
+export FZF_DEFAULT_COMMAND='
+fd --type f --hidden --follow
+--exclude .git
+--exclude node_modules
+--exclude .venv
+'
+
+# Ctrl-T（ファイル検索）
+export FZF_CTRL_T_OPTS="
+--preview '
+if [ -d {} ]; then
+  tree -C {} | head -200
+else
+  bat --style=numbers --color=always --line-range=:300 {} 2>/dev/null \
+  || sed -n \"1,300p\" {}
+fi
+'
+--preview-window=right:60%:wrap
+"
+
+# Alt-C（ディレクトリ移動）
+export FZF_ALT_C_COMMAND='
+fd --type d --hidden --follow
+--exclude .git
+--exclude node_modules
+--exclude .venv
+'

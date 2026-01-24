@@ -131,3 +131,4 @@ if [[ -e ~/.bashrc.local ]]; then
   source ~/.bashrc.local
 fi
 
+. "$HOME/.cargo/env"
