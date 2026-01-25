@@ -51,20 +51,9 @@ esac
 
 # --- fzf -----------------------------------------------------
 # Ctrl-T / Ctrl-R / Alt-C などのキー割り当てはここ
-# 1) まず Homebrew/一般的な場所を探す
-if [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
-  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-  source /opt/homebrew/opt/fzf/shell/completion.zsh 2>/dev/null
-elif [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
-  source /usr/local/opt/fzf/shell/key-bindings.zsh
-  source /usr/local/opt/fzf/shell/completion.zsh 2>/dev/null
-# 2) 次に XDG 配下（あなたが使っていた配置）を試す
-elif [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.zsh" ]]; then
-  source "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.zsh"
-fi
-
-# 使い勝手（任意）
-export FZF_DEFAULT_OPTS="--reverse --height 40%"
+FZF_PATH=$(brew --prefix fzf)
+source $FZF_PATH/shell/key-bindings.zsh
+source $FZF_PATH/shell/completion.zsh 2>/dev/null
 
 # --- zoxide (directory jump) --------------------------------
 # brew install zoxide

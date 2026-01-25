@@ -20,10 +20,10 @@ fi
 
 # fzf
 # 基本設定
-eval "$($(brew --prefix)/bin/brew shellenv)"
-FZF_PATH=$(brew --prefix fzf)
-source $FZF_PATH/shell/key-bindings.zsh
-source $FZF_PATH/shell/completion.zsh 2>/dev/null
+# eval "$($(brew --prefix)/bin/brew shellenv)"
+# FZF_PATH=$(brew --prefix fzf)
+# source $FZF_PATH/shell/key-bindings.zsh
+# source $FZF_PATH/shell/completion.zsh 2>/dev/null
 
 # FZFコマンドコンフィグ
 source $HOME/.config/fzf/config
