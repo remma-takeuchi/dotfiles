@@ -8,16 +8,16 @@ else
   eval "$(`brew --prefix`/bin/brew shellenv)"
 fi
 
-BREWFILE_DIR="{{ .chezmoi.sourceDir }}"
+CONFIG_DIR="{{ .chezmoi.sourceDir }}/config"
 
-brew bundle --file "${BREWFILE_DIR}/Brewfile.common"
+brew bundle --file "${CONFIG_DIR}/Brewfile.common"
 
 {{- if eq .chezmoi.os "darwin" }}
-brew bundle --file "${BREWFILE_DIR}/Brewfile.darwin" || true
+brew bundle --file "${CONFIG_DIR}/Brewfile.darwin" || true
 {{- end }}
 
 {{- if eq .chezmoi.os "linux" }}
-brew bundle --file "${BREWFILE_DIR}/Brewfile.linux" || true
+brew bundle --file "${CONFIG_DIR}/Brewfile.linux" || true
 {{- end }}
 
 # fzf の補助スクリプト（ある場合だけ）

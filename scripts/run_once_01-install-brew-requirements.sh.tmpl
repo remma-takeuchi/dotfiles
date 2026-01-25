@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TOP_DIR="{{ .chezmoi.sourceDir }}"
+CONFIG_DIR="{{ .chezmoi.sourceDir }}/config"
 
 {{- if eq .chezmoi.os "darwin" }}
 
 {{- end }}
 
 {{- if eq .chezmoi.os "linux" }}
-sudo apt install -y $(cat $TOP_DIR/apt-packages.txt)
+sudo apt install -y $(cat $CONFIG_DIR/apt-packages.txt)
 {{- end }}
 
