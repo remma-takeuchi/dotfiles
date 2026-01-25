@@ -19,17 +19,11 @@ if [ $? -eq 0 ]; then
 fi
 
 # fzf
-#export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+# 基本設定
+eval "$($(brew --prefix)/bin/brew shellenv)"
+FZF_PATH=$(brew --prefix fzf)
+source $FZF_PATH/shell/key-bindings.zsh
+source $FZF_PATH/shell/completion.zsh 2>/dev/null
 
-# fzf + rg
-function fgr() {
-  grep_cmd="grep --recursive --line-number --invert-match --regexp '^\s*$' * 2>/dev/null"
-  if type "rg" >/dev/null 2>&1; then
-    grep_cmd="rg --hidden --no-ignore --line-number --no-heading --invert-match '^\s*$' 2>/dev/null"
-  fi
-  read -r file line <<<"$(eval $grep_cmd | fzf --select-1 --exit-0 | awk -F: '{print $1, $2}')"
-  ([[ -z "$file" ]] || [[ -z "$line" ]]) && return
-  vim $file +$line
-}
+# FZFコマンドコンフィグ
+source $HOME/.config/fzf/config
