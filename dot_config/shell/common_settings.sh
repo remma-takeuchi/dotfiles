@@ -1,21 +1,21 @@
 # MACならパスを保管(dircolorsでエラーが出るため)
 if [ "$(uname)" = 'Darwin' ]; then
-    export PATH="$PATH:$(brew --prefix coreutils)/libexec/gnubin"
+  export PATH="$PATH:$(brew --prefix coreutils)/libexec/gnubin"
 fi
 
-# dircolors
-eval `dircolors -b $HOME/.dircolors`
+# # dircolors
+# eval `dircolors -b $HOME/.dircolors`
 
 # cat
-type bat > /dev/null 2>&1
-if [ $? -eq 0 ] ; then
-    alias cat="bat -pP"
+type bat >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+  alias cat="bat -pP"
 fi
 
 # vim
-type nvim > /dev/null 2>&1
-if [ $? -eq 0 ] ; then
-    alias vim="nvim"
+type nvim >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+  alias vim="nvim"
 fi
 
 # fzf
@@ -30,7 +30,6 @@ function fgr() {
     grep_cmd="rg --hidden --no-ignore --line-number --no-heading --invert-match '^\s*$' 2>/dev/null"
   fi
   read -r file line <<<"$(eval $grep_cmd | fzf --select-1 --exit-0 | awk -F: '{print $1, $2}')"
-  ( [[ -z "$file" ]] || [[ -z "$line" ]] ) && return
+  ([[ -z "$file" ]] || [[ -z "$line" ]]) && return
   vim $file +$line
 }
-
