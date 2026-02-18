@@ -1,16 +1,16 @@
 # theme = Dracula
-# theme = Solarized Dark Higher Contrast
-theme = Solarized Dark Patched
+theme = Solarized Dark Higher Contrast
+# theme = Solarized Dark Patched
 
 font-family = Osaka
 
 # フォントを読みやすくする
 font-thicken
-font-size = 15
+font-size = 16
 
 # 背景はちょっと透過している黒
 background = 000
-background-opacity = 0.70
+background-opacity = 0.75
 background-blur = true
 
 
