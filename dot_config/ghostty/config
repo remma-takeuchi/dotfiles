@@ -1,0 +1,44 @@
+# theme = Dracula
+# theme = Solarized Dark Higher Contrast
+theme = Solarized Dark Patched
+
+font-family = Osaka
+
+# フォントを読みやすくする
+font-thicken
+font-size = 15
+
+# 背景はちょっと透過している黒
+background = 000
+background-opacity = 0.70
+background-blur = true
+
+
+# カーソルはblockで点滅させない
+cursor-style = block
+cursor-style-blink = false
+
+# タイピング中はマウスカーソルを非表示にする
+mouse-hide-while-typing
+
+# # メニューバーのタイトルを非表示にする
+# title = " "
+
+window-padding-x = 5
+window-padding-y = 5
+window-padding-balance = true
+
+# # 全画面表示させる
+# fullscreen
+# # ネイティブの全画面は使いたくない
+# macos-non-native-fullscreen = true
+# # メニューバーをできれば透過しておきたいな
+# macos-titlebar-style = transparent
+
+# なんとなく色を変えてみる
+macos-icon = custom-style
+macos-icon-ghost-color = fa5
+macos-icon-screen-color = 000
+
+# 環境によって変えるかも
+quick-terminal-screen = mouse
