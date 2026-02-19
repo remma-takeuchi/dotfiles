@@ -1,1 +1,9 @@
 cask "ghostty"
+cask "alfred"
+cask "google-chrome"
+cask "appcleaner"
+cask "zoom"
+cask "visual-studio-code"
+cask "cursor"
+cask "tunnelblick"
+
