@@ -8,7 +8,7 @@ cask "visual-studio-code"
 cask "tunnelblick"
 cask "rectangle"
 cask "google-japanese-ime"
-
+cask "scroll-reverser"
+cask "podman-desktop"
 
 brew "podman"
-brew "podman-compose"
