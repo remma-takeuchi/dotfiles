@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# brew の PATH を補助（Mac / Linux）
+if command -v brew >/dev/null 2>&1; then
+  :
+else
+  eval "$($(brew --prefix)/bin/brew shellenv)"
+fi
+
+CONFIG_DIR="{{ .chezmoi.sourceDir }}/config"
+
+brew bundle --file "${CONFIG_DIR}/Brewfile.common"
+
+{{- if eq .chezmoi.os "darwin" }}
+brew bundle --file "${CONFIG_DIR}/Brewfile.darwin" || true
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
+brew bundle --file "${CONFIG_DIR}/Brewfile.linux" || true
+{{- end }}
