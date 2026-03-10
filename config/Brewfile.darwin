@@ -9,4 +9,7 @@ cask "rectangle"
 cask "google-japanese-ime"
 cask "scroll-reverser"
 cask "logi-options+"
+cask "alt-tab"
+
 brew "pyenv"
+brew "protobuf"

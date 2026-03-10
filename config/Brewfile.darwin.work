@@ -4,3 +4,6 @@ cask "podman-desktop"
 cask "mobster"
 
 brew "podman"
+
+tap "slp/krunkit"
+brew "krunkit"
