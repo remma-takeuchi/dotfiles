@@ -5,20 +5,16 @@ set -euo pipefail
 if command -v brew >/dev/null 2>&1; then
   :
 else
-  eval "$(`brew --prefix`/bin/brew shellenv)"
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  else
+    echo "brew not found" >&2
+    exit 1
+  fi
 fi
 
-CONFIG_DIR="{{ .chezmoi.sourceDir }}/config"
-
-brew bundle --file "${CONFIG_DIR}/Brewfile.common"
-
-{{- if eq .chezmoi.os "darwin" }}
-brew bundle --file "${CONFIG_DIR}/Brewfile.darwin" || true
-{{- end }}
-
-{{- if eq .chezmoi.os "linux" }}
-brew bundle --file "${CONFIG_DIR}/Brewfile.linux" || true
-{{- end }}
 
 # fzf の補助スクリプト（ある場合だけ）
 if brew --prefix fzf >/dev/null 2>&1; then

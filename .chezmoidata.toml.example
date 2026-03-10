@@ -1,0 +1,4 @@
+# 共通。マシン固有の値は ~/.config/chezmoi/chezmoi.toml の [data] で上書き推奨。
+
+#profile = "priv" # "work" or "priv"
+profile = "work"

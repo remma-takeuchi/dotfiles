@@ -1,0 +1,6 @@
+cask "slack"
+cask "tunnelblick"
+cask "podman-desktop"
+cask "mobster"
+
+brew "podman"
