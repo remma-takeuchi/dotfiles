@@ -13,3 +13,5 @@ cask "alt-tab"
 
 brew "pyenv"
 brew "protobuf"
+brew "node"
+brew "grpcurl"
