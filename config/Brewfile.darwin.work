@@ -2,6 +2,7 @@ cask "slack"
 cask "tunnelblick"
 cask "podman-desktop"
 cask "mobster"
+cask "figma"
 
 brew "podman"
 

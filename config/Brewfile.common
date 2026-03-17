@@ -10,3 +10,8 @@ brew "fd"
 brew "bat"
 brew "tmux"
 brew "tree"
+
+brew "automake"
+brew "autoconf"
+brew "libtool"
+brew "pkg-config"
