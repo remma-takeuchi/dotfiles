@@ -10,6 +10,7 @@ cask "google-japanese-ime"
 cask "scroll-reverser"
 cask "logi-options+"
 cask "alt-tab"
+cask "balenaetcher"
 
 brew "pyenv"
 brew "protobuf"
