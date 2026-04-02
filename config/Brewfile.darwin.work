@@ -8,3 +8,5 @@ brew "podman"
 
 tap "slp/krunkit"
 brew "krunkit"
+
+brew "duckdb"
