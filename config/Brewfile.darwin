@@ -11,6 +11,7 @@ cask "scroll-reverser"
 cask "logi-options+"
 cask "alt-tab"
 cask "balenaetcher"
+cask "aqua-voice"
 
 brew "pyenv"
 brew "protobuf"
