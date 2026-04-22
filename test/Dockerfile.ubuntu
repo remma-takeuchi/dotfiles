@@ -1,0 +1,67 @@
+FROM ubuntu:22.04
+
+# タイムゾーン設定（インタラクティブプロンプトを回避）
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Tokyo
+
+# 基本パッケージのインストール
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    procps \
+    file \
+    curl \
+    git \
+    sudo \
+    locales \
+    ca-certificates \
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# ロケール設定
+RUN locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+# テストユーザーの作成（sudoers権限付き）
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Homebrewのインストール
+USER testuser
+WORKDIR /home/testuser
+
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/testuser/.bashrc && \
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/testuser/.profile
+
+# brewのPATHを設定
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+
+# chezmoiのインストール
+RUN /home/linuxbrew/.linuxbrew/bin/brew install chezmoi
+
+# Gitの設定（chezmoiのために必要）
+RUN git config --global user.email "test@example.com" && \
+    git config --global user.name "Test User"
+
+# Dotfilesリポジトリからchezmoiをinitして適用
+RUN chezmoi init --apply https://github.com/remma-takeuchi/dotfiles.git || true
+
+# .chezmoidata.tomlを設定（存在しない場合）
+RUN if [ ! -f ~/.local/share/chezmoi/.chezmoidata.toml ] && [ -f ~/.local/share/chezmoi/.chezmoidata.toml.example ]; then \
+        cp ~/.local/share/chezmoi/.chezmoidata.toml.example ~/.local/share/chezmoi/.chezmoidata.toml && \
+        sed -i 's/profile = ".*"/profile = "test"/' ~/.local/share/chezmoi/.chezmoidata.toml; \
+    fi
+
+# chezmoiを再適用（設定ファイル作成後）
+RUN chezmoi apply || true
+
+# テストスクリプトをコピー
+COPY --chown=testuser:testuser test.sh /home/testuser/.local/share/chezmoi/test/test.sh
+RUN chmod +x /home/testuser/.local/share/chezmoi/test/test.sh
+
+WORKDIR /home/testuser
+
+# デフォルトコマンド
+CMD ["/bin/bash", "-l"]
