@@ -27,3 +27,5 @@ fi
 
 # FZFコマンドコンフィグ
 source $HOME/.config/fzf/config
+
+export PODMAN_COMPOSE_PROVIDER=/opt/homebrew/bin/podman-compose

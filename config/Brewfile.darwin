@@ -12,6 +12,7 @@ cask "logi-options+"
 cask "alt-tab"
 cask "balenaetcher"
 cask "aqua-voice"
+cask "hiddenbar"
 
 brew "pyenv"
 brew "protobuf"
