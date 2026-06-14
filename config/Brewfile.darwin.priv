@@ -1,1 +1,8 @@
+cask "claude"
+cask "claude-code"
 
+cask "chatgpt"
+cask "codex"
+cask "codex-app"
+
+cask "aqua-voice"
