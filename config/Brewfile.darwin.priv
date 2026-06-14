@@ -6,3 +6,5 @@ cask "codex"
 cask "codex-app"
 
 cask "aqua-voice"
+
+cask "tailscale"
