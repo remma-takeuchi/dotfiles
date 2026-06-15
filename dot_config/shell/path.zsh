@@ -1,7 +1,7 @@
 # ~/.config/shell/path.zsh
 
 # Homebrew (Apple Silicon)
-[[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin /opt/homebrew/sbin $path)
+[[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin /opt/homebrew/sbin /opt/homebrew/opt/openjdk/bin $path)
 
 # Linuxbrew
 TARGET_PATH="/home/linuxbrew/.linuxbrew/"
