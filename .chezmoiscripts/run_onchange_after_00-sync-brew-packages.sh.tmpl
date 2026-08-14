@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+
+# Brewfile.common hash: {{ include "config/Brewfile.common" | sha256sum }}
+{{- if eq .chezmoi.os "darwin" }}
+# Brewfile.darwin hash: {{ include "config/Brewfile.darwin" | sha256sum }}
+{{- if eq .profile "work" }}
+# Brewfile.darwin.work hash: {{ include "config/Brewfile.darwin.work" | sha256sum }}
+{{- end }}
+{{- if eq .profile "priv" }}
+# Brewfile.darwin.priv hash: {{ include "config/Brewfile.darwin.priv" | sha256sum }}
+{{- end }}
+{{- end }}
+{{- if eq .chezmoi.os "linux" }}
+# Brewfile.linux hash: {{ include "config/Brewfile.linux" | sha256sum }}
+{{- end }}
+
+export CHEZMOI_PROFILE={{ .profile | quote }}
+exec bash {{ joinPath .chezmoi.sourceDir "scripts/brew-bundle.sh" | quote }} --no-upgrade

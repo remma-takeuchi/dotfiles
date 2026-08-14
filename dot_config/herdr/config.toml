@@ -3,13 +3,13 @@
 [keys]
 prefix = "ctrl+q"
 
-# tmux と同じ新規ウィンドウ・次ペインへの移動キーにする。
-new_tab = "prefix+c"
-cycle_pane_next = "prefix+o"
-
-# Herdr のリサイズは専用モードで行う。
-# Shift+H/J/K/L はペイン交換に予約されているため上書きしない。
-resize_mode = "prefix+r"
+# # tmux と同じ新規ウィンドウ・次ペインへの移動キーにする。
+# new_tab = "prefix+c"
+# cycle_pane_next = "prefix+o"
+#
+# # Herdr のリサイズは専用モードで行う。
+# # Shift+H/J/K/L はペイン交換に予約されているため上書きしない。
+# resize_mode = "prefix+r"
 
 [theme]
 name = "solarized"
