@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -d "$HOME/.sdkman" ]; then
+  echo "SDKMAN is already installed, skipping."
+  exit 0
+fi
+
+curl -s "https://get.sdkman.io" | bash
