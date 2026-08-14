@@ -18,7 +18,7 @@ auto_switch = false
 [ui]
 show_agent_labels_on_pane_borders = true
 # tmux と同様、新規タブを即座に作成する。
-prompt_new_tab_name = false
+# prompt_new_tab_name = false
 
 [ui.toast]
 delivery = "system"
