@@ -10,7 +10,7 @@ NC='\033[0m'
 
 # 設定
 IMAGE_NAME="chezmoi-dotfiles-test"
-IMAGE_TAG="ubuntu22.04"
+IMAGE_TAG="ubuntu24.04"
 CONTAINER_NAME="chezmoi-test-$(date +%s)"
 
 # スクリプトのディレクトリ
@@ -53,7 +53,7 @@ EOF
 build_image() {
     echo -e "${BLUE}Building Docker image: ${IMAGE_NAME}:${IMAGE_TAG}${NC}"
 
-    if docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" -f "${SCRIPT_DIR}/Dockerfile.ubuntu" "${SCRIPT_DIR}"; then
+    if docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" -f "${SCRIPT_DIR}/Dockerfile.ubuntu" "${PROJECT_ROOT}"; then
         echo -e "${GREEN}✓ Image built successfully${NC}"
         return 0
     else
@@ -86,7 +86,7 @@ run_tests() {
 run_shell() {
     echo -e "${BLUE}Starting interactive shell...${NC}"
     echo -e "${YELLOW}Note: Container will be removed on exit (--rm)${NC}"
-    echo -e "${YELLOW}Dotfiles are already applied from: https://github.com/remma-takeuchi/dotfiles.git${NC}"
+    echo -e "${YELLOW}Dotfiles from the current working tree are already applied${NC}"
     echo ""
 
     docker run --rm -it \

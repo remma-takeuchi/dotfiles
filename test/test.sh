@@ -135,14 +135,11 @@ else
     print_test_result "chezmoi status command works" "FAIL"
 fi
 
-# chezmoi verifyは、ローカル変更（test/など）があると失敗するため、
-# エラーを許容して警告として扱う
+# 適用済みファイルがソースと一致することを確認する
 if chezmoi verify >/dev/null 2>&1; then
     print_test_result "chezmoi verify (all files match)" "PASS"
 else
-    # ローカルの変更がある場合は警告として扱う
-    echo -e "${YELLOW}  Note: Some files have local changes (expected for test environment)${NC}"
-    print_test_result "chezmoi verify (with local changes)" "PASS"
+    print_test_result "chezmoi verify (all files match)" "FAIL"
 fi
 
 # 6. ソースdotfilesの検証
