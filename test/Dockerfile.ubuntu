@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # タイムゾーン設定（インタラクティブプロンプトを回避）
 ENV DEBIAN_FRONTEND=noninteractive
@@ -45,8 +45,9 @@ RUN /home/linuxbrew/.linuxbrew/bin/brew install chezmoi
 RUN git config --global user.email "test@example.com" && \
     git config --global user.name "Test User"
 
-# Dotfilesリポジトリからchezmoiをinitして適用
-RUN chezmoi init --apply https://github.com/remma-takeuchi/dotfiles.git || true
+# 現在の作業ツリーをテスト対象としてコンテナにコピーする。
+# 公開リポジトリを clone しないため、未 push の変更も検証できる。
+COPY --chown=testuser:testuser . /home/testuser/.local/share/chezmoi
 
 # .chezmoidata.tomlを設定（存在しない場合）
 RUN if [ ! -f ~/.local/share/chezmoi/.chezmoidata.toml ] && [ -f ~/.local/share/chezmoi/.chezmoidata.toml.example ]; then \
@@ -54,11 +55,10 @@ RUN if [ ! -f ~/.local/share/chezmoi/.chezmoidata.toml ] && [ -f ~/.local/share/
         sed -i 's/profile = ".*"/profile = "test"/' ~/.local/share/chezmoi/.chezmoidata.toml; \
     fi
 
-# chezmoiを再適用（設定ファイル作成後）
-RUN chezmoi apply || true
+# 設定ファイル作成後に適用する。失敗はイメージビルドを失敗させる。
+RUN chezmoi apply
 
-# テストスクリプトをコピー
-COPY --chown=testuser:testuser test.sh /home/testuser/.local/share/chezmoi/test/test.sh
+# テストスクリプトを実行可能にする
 RUN chmod +x /home/testuser/.local/share/chezmoi/test/test.sh
 
 WORKDIR /home/testuser

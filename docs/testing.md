@@ -5,8 +5,10 @@
 ## 概要
 
 Dockerイメージのビルド時に以下を実行します：
-- GitHubリポジトリ（https://github.com/remma-takeuchi/dotfiles.git）から`chezmoi init --apply`を実行
-- dotfilesの適用を完了
+- 現在の作業ツリーをコンテナにコピー
+- `chezmoi apply`を実行して dotfiles の適用を完了
+
+未コミット・未 push の変更もテスト対象になります。
 
 テスト環境では以下を確認します：
 - chezmoiが正しく初期化されているか
@@ -120,7 +122,7 @@ testuser@container:~$ exit
 
 ```bash
 # キャッシュをクリアして再ビルド
-docker build --no-cache -t chezmoi-dotfiles-test:ubuntu22.04 -f test/Dockerfile.ubuntu test/
+docker build --no-cache -t chezmoi-dotfiles-test:ubuntu24.04 -f test/Dockerfile.ubuntu .
 ```
 
 ### テストが失敗する
@@ -142,7 +144,7 @@ Homebrewのインストールには時間がかかる場合があります（5-1
 ```
 .
 ├── test/
-│   ├── Dockerfile.ubuntu       # Ubuntu 22.04テスト環境
+│   ├── Dockerfile.ubuntu       # Ubuntu 24.04テスト環境
 │   ├── test.sh                 # 自動テストスクリプト
 │   └── run-test.sh             # テスト実行ヘルパー
 ├── Makefile                    # 簡単なコマンド実行用
@@ -152,7 +154,7 @@ Homebrewのインストールには時間がかかる場合があります（5-1
 
 ## 注意事項
 
-- Dockerイメージのビルド時に、GitHubリポジトリから`chezmoi init --apply`が実行されます
+- Dockerイメージのビルド時に、現在の作業ツリーに対して`chezmoi apply`が実行されます
 - テストコンテナは`--rm`フラグで起動されるため、終了時に自動削除されます
 - テスト用ユーザー`testuser`はsudo権限を持っています（パスワード不要）
 - イメージビルドには時間がかかります（Homebrewのインストールとdotfilesの適用で5-10分程度）
