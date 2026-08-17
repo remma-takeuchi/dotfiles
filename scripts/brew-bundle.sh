@@ -25,6 +25,18 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 config_dir="$(cd "$script_dir/../config" && pwd)"
 profile="${CHEZMOI_PROFILE:-}"
 
+# Third-party taps require explicit trust before `brew bundle` can load their
+# formulae/casks. Trust any tap declared in a Brewfile up front so re-runs
+# (e.g. on a fresh machine) never fail on an "untrusted tap" error.
+trust_taps() {
+  local brewfile="$1"
+  [ -f "$brewfile" ] || return 0
+
+  grep -E '^\s*tap\s+"' "$brewfile" | sed -E 's/^\s*tap\s+"([^"]+)".*/\1/' | while IFS= read -r tap; do
+    brew trust --tap "$tap" >/dev/null 2>&1 || true
+  done
+}
+
 run_bundle() {
   local brewfile="$1"
 
@@ -41,14 +53,22 @@ run_bundle() {
   esac
 }
 
+trust_taps "$config_dir/Brewfile.common"
 run_bundle "$config_dir/Brewfile.common"
 
 case "$(uname -s)" in
   Darwin)
+    trust_taps "$config_dir/Brewfile.darwin"
     run_bundle "$config_dir/Brewfile.darwin"
     case "$profile" in
-      work) run_bundle "$config_dir/Brewfile.darwin.work" ;;
-      priv) run_bundle "$config_dir/Brewfile.darwin.priv" ;;
+      work)
+        trust_taps "$config_dir/Brewfile.darwin.work"
+        run_bundle "$config_dir/Brewfile.darwin.work"
+        ;;
+      priv)
+        trust_taps "$config_dir/Brewfile.darwin.priv"
+        run_bundle "$config_dir/Brewfile.darwin.priv"
+        ;;
       "") ;;
       *)
         echo "unknown CHEZMOI_PROFILE: $profile (expected work or priv)" >&2
@@ -64,6 +84,7 @@ case "$(uname -s)" in
     fi
     ;;
   Linux)
+    trust_taps "$config_dir/Brewfile.linux"
     run_bundle "$config_dir/Brewfile.linux"
     ;;
   *)
