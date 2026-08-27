@@ -1,12 +1,6 @@
 cask "slack"
 cask "tunnelblick"
-cask "podman-desktop"
 cask "mobster"
 cask "figma"
-
-brew "podman"
-
-tap "slp/krunkit"
-brew "krunkit"
 
 brew "duckdb"

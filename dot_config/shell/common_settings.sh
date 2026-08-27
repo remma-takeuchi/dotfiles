@@ -28,4 +28,6 @@ fi
 # FZFコマンドコンフィグ
 source $HOME/.config/fzf/config
 
-export PODMAN_COMPOSE_PROVIDER=/opt/homebrew/bin/podman-compose
+if type podman >/dev/null 2>&1; then
+  eval "$(podman completion zsh)"
+fi
