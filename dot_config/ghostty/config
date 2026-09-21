@@ -42,3 +42,6 @@ macos-icon-screen-color = 000
 
 # 環境によって変えるかも
 quick-terminal-screen = mouse
+
+# グローバルホットキーでGhosttyの表示/非表示を切り替える
+keybind = global:ctrl+t=toggle_visibility

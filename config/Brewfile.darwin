@@ -12,6 +12,8 @@ cask "logi-options+"
 cask "alt-tab"
 cask "balenaetcher"
 cask "hiddenbar"
+cask "raycast"
+cask "1password"
 
 brew "pyenv"
 brew "protobuf"

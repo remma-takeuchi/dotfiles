@@ -34,7 +34,7 @@ trust_taps() {
 
   grep -E '^\s*tap\s+"' "$brewfile" | sed -E 's/^\s*tap\s+"([^"]+)".*/\1/' | while IFS= read -r tap; do
     brew trust --tap "$tap" >/dev/null 2>&1 || true
-  done
+  done || true
 }
 
 run_bundle() {

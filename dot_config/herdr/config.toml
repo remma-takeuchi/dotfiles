@@ -1,3 +1,4 @@
+onboarding = false
 # 日常の操作を dot_tmux.conf に近づける。
 # prefix を使う組み込みキーバインドにも、この設定が反映される。
 [keys]
