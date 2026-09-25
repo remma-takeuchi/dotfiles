@@ -82,10 +82,17 @@ else
     print_test_result "Chezmoi is initialized with git" "FAIL"
 fi
 
-if [ -f "${CHEZMOI_SOURCE_DIR}/.chezmoidata.toml" ]; then
-    print_test_result "Chezmoi data file exists" "PASS"
+if [ "$(bash "${CHEZMOI_SOURCE_DIR}/scripts/resolve-profile.sh" rtakeuchi)" = "work" ] &&
+    [ "$(bash "${CHEZMOI_SOURCE_DIR}/scripts/resolve-profile.sh" ren)" = "priv" ]; then
+    print_test_result "Package profiles match usernames" "PASS"
 else
-    print_test_result "Chezmoi data file exists" "FAIL"
+    print_test_result "Package profiles match usernames" "FAIL"
+fi
+
+if bash "${CHEZMOI_SOURCE_DIR}/scripts/resolve-profile.sh" unknown >/dev/null 2>&1; then
+    print_test_result "Unknown package profile is rejected" "FAIL"
+else
+    print_test_result "Unknown package profile is rejected" "PASS"
 fi
 
 # 3. スクリプトの構文チェック

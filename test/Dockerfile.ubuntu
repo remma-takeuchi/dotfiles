@@ -49,13 +49,7 @@ RUN git config --global user.email "test@example.com" && \
 # 公開リポジトリを clone しないため、未 push の変更も検証できる。
 COPY --chown=testuser:testuser . /home/testuser/.local/share/chezmoi
 
-# .chezmoidata.tomlを設定（存在しない場合）
-RUN if [ ! -f ~/.local/share/chezmoi/.chezmoidata.toml ] && [ -f ~/.local/share/chezmoi/.chezmoidata.toml.example ]; then \
-        cp ~/.local/share/chezmoi/.chezmoidata.toml.example ~/.local/share/chezmoi/.chezmoidata.toml && \
-        sed -i 's/profile = ".*"/profile = "test"/' ~/.local/share/chezmoi/.chezmoidata.toml; \
-    fi
-
-# 設定ファイル作成後に適用する。失敗はイメージビルドを失敗させる。
+# dotfilesを適用する。失敗はイメージビルドを失敗させる。
 RUN chezmoi apply
 
 # テストスクリプトを実行可能にする

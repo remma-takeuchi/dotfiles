@@ -24,6 +24,11 @@ fi
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 config_dir="$(cd "$script_dir/../config" && pwd)"
 profile="${CHEZMOI_PROFILE:-}"
+os="$(uname -s)"
+
+if [ "$os" = "Darwin" ] && [ -z "$profile" ]; then
+  profile="$(bash "$script_dir/resolve-profile.sh")"
+fi
 
 # Third-party taps require explicit trust before `brew bundle` can load their
 # formulae/casks. Trust any tap declared in a Brewfile up front so re-runs
@@ -56,7 +61,7 @@ run_bundle() {
 trust_taps "$config_dir/Brewfile.common"
 run_bundle "$config_dir/Brewfile.common"
 
-case "$(uname -s)" in
+case "$os" in
   Darwin)
     trust_taps "$config_dir/Brewfile.darwin"
     run_bundle "$config_dir/Brewfile.darwin"
@@ -69,7 +74,6 @@ case "$(uname -s)" in
         trust_taps "$config_dir/Brewfile.darwin.priv"
         run_bundle "$config_dir/Brewfile.darwin.priv"
         ;;
-      "") ;;
       *)
         echo "unknown CHEZMOI_PROFILE: $profile (expected work or priv)" >&2
         exit 2
@@ -88,7 +92,7 @@ case "$(uname -s)" in
     run_bundle "$config_dir/Brewfile.linux"
     ;;
   *)
-    echo "unsupported operating system: $(uname -s)" >&2
+    echo "unsupported operating system: $os" >&2
     exit 2
     ;;
 esac

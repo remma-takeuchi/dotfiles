@@ -1,8 +1,8 @@
 .PHONY: help packages-check packages-install packages-upgrade test test-build test-shell test-clean
 
-# chezmoi の template data から profile を取得する。必要に応じて
+# macOSではユーザー名からprofileを自動判定する。必要に応じて
 # `make packages-install PROFILE=work` のように上書きできる。
-PROFILE ?= $(shell chezmoi execute-template '{{ .profile }}' 2>/dev/null)
+PROFILE ?=
 
 # デフォルトターゲット: ヘルプを表示
 help:
@@ -17,6 +17,7 @@ help:
 	@echo "  make packages-check                 Check Brewfile dependencies"
 	@echo "  make packages-install [PROFILE=...] Install missing Brewfile dependencies"
 	@echo "  make packages-upgrade [PROFILE=...] Upgrade Brewfile dependencies"
+	@echo "    macOS profile: rtakeuchi=work, ren=priv (PROFILE overrides detection)"
 	@echo ""
 
 # Brewfile の同期は明示的に行う。通常の chezmoi apply では、Brewfile の
