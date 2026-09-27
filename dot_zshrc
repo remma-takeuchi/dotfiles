@@ -6,6 +6,11 @@
 # マシン固有（PATH追加/プロキシ等）があるなら早めに読む
 [[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
 
+# --- mise ---------------------------------------------------
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
+
 # --- Basics -------------------------------------------------
 export LANG=en_US.UTF-8
 setopt print_eight_bit
@@ -73,3 +78,8 @@ fi
 
 # --- Other shared settings ----------------------------------
 [[ -e ~/.config/shell/common_settings.sh ]] && source ~/.config/shell/common_settings.sh
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/ren/.docker/completions $fpath)
+autoload -Uz compinit
+(( ${+_comps[docker]} )) || compinit
+# End of Docker CLI completions
