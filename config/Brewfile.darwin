@@ -1,5 +1,4 @@
 cask "ghostty"
-cask "alfred"
 cask "obsidian"
 cask "google-chrome"
 cask "appcleaner"
@@ -23,4 +22,5 @@ brew "grpcurl"
 brew "protobuf"
 brew "uv"
 brew "gh"
+brew "aicommits"
 
