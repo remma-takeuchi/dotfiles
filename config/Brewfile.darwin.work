@@ -1,6 +1,6 @@
 cask "slack"
 cask "tunnelblick"
-cask "mobster"
 cask "figma"
+cask "copilot-cli"
 
 brew "duckdb"
