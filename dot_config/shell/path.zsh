@@ -3,6 +3,9 @@
 # Homebrew (Apple Silicon)
 [[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin /opt/homebrew/sbin /opt/homebrew/opt/openjdk/bin $path)
 
+# Podman (Podman Desktop)
+[[ -d /opt/podman/bin ]] && path=($path /opt/podman/bin)
+
 # Linuxbrew
 TARGET_PATH="/home/linuxbrew/.linuxbrew/"
 [[ -d $TARGET_PATH/bin ]] && path=($TARGET_PATH/bin $TARGET_PATH/sbin $path)
