@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+# herdr プラグインを導入する。herdr が未導入の環境では何もしない。
+if ! command -v herdr >/dev/null 2>&1; then
+  exit 0
+fi
+
+# 同一プラグインが導入済みでも失敗させない。
+herdr plugin install shibayu36/herdr-equalize-panes --yes || true

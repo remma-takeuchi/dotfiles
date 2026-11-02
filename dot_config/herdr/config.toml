@@ -4,6 +4,9 @@ onboarding = false
 [keys]
 prefix = "ctrl+q"
 
+# tmux と同様に prefix+\ でも縦分割（左右に並ぶ分割）できるようにする。
+split_vertical = ["prefix+v", "prefix+\\"]
+
 # # tmux と同じ新規ウィンドウ・次ペインへの移動キーにする。
 # new_tab = "prefix+c"
 # cycle_pane_next = "prefix+o"
