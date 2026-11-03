@@ -1,5 +1,5 @@
 cask "claude"
-cask "claude-code"
+cask "claude-code@latest"
 
 cask "chatgpt"
 cask "codex"
@@ -7,4 +7,4 @@ cask "codex-app"
 
 cask "aqua-voice"
 
-cask "tailscale"
+cask "tailscale-app"
