@@ -7,13 +7,13 @@ prefix = "ctrl+q"
 # tmux と同様に prefix+\ でも縦分割（左右に並ぶ分割）できるようにする。
 split_vertical = ["prefix+v", "prefix+\\"]
 
-# # tmux と同じ新規ウィンドウ・次ペインへの移動キーにする。
-# new_tab = "prefix+c"
-# cycle_pane_next = "prefix+o"
-#
-# # Herdr のリサイズは専用モードで行う。
-# # Shift+H/J/K/L はペイン交換に予約されているため上書きしない。
-# resize_mode = "prefix+r"
+# tmux と同じ新規ウィンドウ・次ペインへの移動キーにする。
+new_tab = "prefix+c"
+cycle_pane_next = "prefix+o"
+
+# Herdr のリサイズは専用モードで行う。
+# Shift+H/J/K/L はペイン交換に予約されているため上書きしない。
+resize_mode = "prefix+r"
 
 [theme]
 name = "solarized"
@@ -21,6 +21,14 @@ auto_switch = false
 
 [ui]
 show_agent_labels_on_pane_borders = true
+
+# Spaces を見分けやすくする。
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  ["state_icon", { token = "workspace", bold = true }],
+  ["branch", "git_status"],
+]
 # tmux と同様、新規タブを即座に作成する。
 # prompt_new_tab_name = false
 
