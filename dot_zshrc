@@ -40,6 +40,12 @@ compinit -C -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:default' menu select=1
 
+# AWS CLI 補完 (aws s3 ls など)
+if command -v aws_completer >/dev/null 2>&1; then
+  autoload -Uz bashcompinit && bashcompinit
+  complete -C "$(command -v aws_completer)" aws
+fi
+
 # --- ls colors / aliases ------------------------------------
 case "${OSTYPE}" in
   darwin*)
