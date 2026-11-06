@@ -8,3 +8,6 @@ fi
 
 # 同一プラグインが導入済みでも失敗させない。
 herdr plugin install shibayu36/herdr-equalize-panes --yes || true
+
+# Go 不要のリリース版バイナリを使うため stable を指定する。
+herdr plugin install kryptamine/herdr-auto-title --ref stable --yes || true
